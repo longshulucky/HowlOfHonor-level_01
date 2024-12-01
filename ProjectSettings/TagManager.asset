@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Hunter
   - Monster
+  - HealthPotion
   layers:
   - Default
   - TransparentFX

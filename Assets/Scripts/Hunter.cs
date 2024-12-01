@@ -11,6 +11,7 @@ public class Hunter : MonoBehaviour
     [SerializeField] private float health = 100f;
     [SerializeField] private HealthBar healthBar;
     [SerializeField] private Weapon weapon;
+    [SerializeField] private ItemDisplay itemDisplay;
     private float attackTimer = 0f;
 
     // Start is called before the first frame update
@@ -62,9 +63,10 @@ public class Hunter : MonoBehaviour
     public void UseHealthPotion(HealthPotion potion)
     {
         health += potion.GetHealthAmount();
-        if (health > 100f) health = 100f; // Assurez-vous que la santé ne dépasse pas 100
+        if (health > 100f) health = 100f;
         healthBar.UpdateHealth(health);
         potion.Consume();
+        //itemDisplay.SetItem(potion.GetHealthAmount(), potion.GetComponent<SpriteRenderer>().sprite);
     }
 
     public bool IsCarryingWeapon()
@@ -77,6 +79,7 @@ public class Hunter : MonoBehaviour
         this.weapon = weapon;
         weapon.transform.SetParent(transform); // Set hunter as a parent
         weapon.transform.localPosition = new Vector3(0, 1, 0); // Position for carrying weapon
+        itemDisplay.SetItem(weapon.GetUseTime(), weapon.GetImage());
     }
 
     void Attack()
