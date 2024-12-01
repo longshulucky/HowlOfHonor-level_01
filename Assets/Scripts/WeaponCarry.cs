@@ -51,8 +51,11 @@ public class WeaponCarry : MonoBehaviour
         Hunter hunter = FindObjectOfType<Hunter>();
         if (hunter != null)
         {
-            hunter.EquipWeapon(carriedWeapon);
-            carriedWeapon = null;
+            if (!hunter.IsCarryingWeapon())
+            {
+                hunter.EquipWeapon(carriedWeapon);
+                carriedWeapon = null;
+            }
         }
     }
 }
