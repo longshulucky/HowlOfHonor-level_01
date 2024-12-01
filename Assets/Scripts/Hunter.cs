@@ -10,6 +10,7 @@ public class Hunter : MonoBehaviour
     [SerializeField] private Vector3 direction;
     [SerializeField] private float health = 100f;
     [SerializeField] private HealthBar healthBar;
+    [SerializeField] private Weapon weapon;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +28,12 @@ public class Hunter : MonoBehaviour
             ChangeDirection();
         }
         transform.Translate(direction * speed * Time.deltaTime, Space.World);
+
+        // Attack if hunter has a weapon
+        if (weapon != null)
+        {
+            Attack();
+        }
     }
 
     void ChangeDirection()
@@ -45,6 +52,32 @@ public class Hunter : MonoBehaviour
             if (health <= 0)
             {
                 Debug.Log("Hunter is dead!");
+            }
+        }
+    }
+
+    public bool IsCarryingWeapon()
+    {
+        return weapon != null;
+    }
+
+    public void EquipWeapon(Weapon weapon)
+    {
+        this.weapon = weapon;
+        weapon.transform.SetParent(transform); // Set hunter as a parent
+        weapon.transform.localPosition = new Vector3(0, 1, 0); // Position for carrying weapon
+    }
+
+    void Attack()
+    {
+        Collider[] monsters = Physics.OverlapSphere(transform.position, 2f); // Attack radius
+        foreach (Collider monsterCollider in monsters)
+        {
+            Monster monster = monsterCollider.GetComponent<Monster>();
+            if (monster != null)
+            {
+                //weapon.Attack(monster.transform);
+                monster.LoseHealth(weapon.GetDamage());
             }
         }
     }

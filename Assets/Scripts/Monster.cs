@@ -9,6 +9,7 @@ public class Monster : MonoBehaviour
     [SerializeField] private float damage = 3f;
     [SerializeField] private float attackDistance = 3f;
     [SerializeField] private bool isAttacking = false;
+    [SerializeField] private float health = 10f;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +38,11 @@ public class Monster : MonoBehaviour
             {
                 StartCoroutine(Attack());
             }
+        }
+
+        if (health < 0)
+        {
+            Death();
         }
     }
 
@@ -85,5 +91,10 @@ public class Monster : MonoBehaviour
     public float GetDamage()
     {
         return damage;
+    }
+
+    public void LoseHealth(float damage)
+    {
+        health -= damage;
     }
 }

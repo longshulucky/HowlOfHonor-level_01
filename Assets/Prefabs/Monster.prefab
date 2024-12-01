@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2756412621903786070}
   - component: {fileID: 8252758606807676861}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: monster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 6262443534019917850}
   - component: {fileID: 3544147909781414670}
   - component: {fileID: 3315686289158293429}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Monster
   m_TagString: Monster
   m_Icon: {fileID: 0}
@@ -133,6 +133,8 @@ MonoBehaviour:
   speed: 2
   target: {fileID: 0}
   damage: 3
+  attackDistance: 3
+  isAttacking: 0
 --- !u!136 &3315686289158293429
 CapsuleCollider:
   m_ObjectHideFlags: 0
