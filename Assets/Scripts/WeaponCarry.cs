@@ -20,7 +20,7 @@ public class WeaponCarry : MonoBehaviour
     {
         if (other.CompareTag("Hunter") && !other.GetComponent<Hunter>().IsCarryingWeapon())
         {
-            //GiveWeaponToHunter();
+            GiveWeaponToHunter();
         }
     }
 
@@ -46,13 +46,13 @@ public class WeaponCarry : MonoBehaviour
         weapon.transform.localRotation = Quaternion.identity;
     }
 
-    //void GiveWeaponToHunter()
-    //{
-    //    Hunter hunter = FindObjectOfType<Hunter>();
-    //    if (hunter != null)
-    //    {
-    //        hunter.EquipWeapon(carriedWeapon);
-    //        carriedWeapon = null;
-    //    }
-    //}
+    void GiveWeaponToHunter()
+    {
+        Hunter hunter = FindObjectOfType<Hunter>();
+        if (hunter != null)
+        {
+            hunter.EquipWeapon(carriedWeapon);
+            carriedWeapon = null;
+        }
+    }
 }

@@ -70,15 +70,22 @@ public class Hunter : MonoBehaviour
 
     void Attack()
     {
-        Collider[] monsters = Physics.OverlapSphere(transform.position, 2f); // Attack radius
+        StartCoroutine(RemoveWeapon());
+        Collider[] monsters = Physics.OverlapSphere(transform.position, weapon.GetAttackRadius());
         foreach (Collider monsterCollider in monsters)
         {
             Monster monster = monsterCollider.GetComponent<Monster>();
             if (monster != null)
             {
-                //weapon.Attack(monster.transform);
                 monster.LoseHealth(weapon.GetDamage());
             }
         }
+    }
+
+    IEnumerator RemoveWeapon()
+    {
+        yield return new WaitForSeconds(weapon.GetUseTime());
+        Destroy(weapon.gameObject);
+        weapon = null;
     }
 }
