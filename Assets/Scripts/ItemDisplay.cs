@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,6 +7,8 @@ public class ItemDisplay : MonoBehaviour
 {
     [SerializeField] private Image itemIcon;
     [SerializeField] private TextMeshProUGUI timerText;
+    private Coroutine timerCoroutine;
+
     public void UpdateItemUI(Sprite icon, float remainingTime)
     {
         itemIcon.sprite = icon;
@@ -18,5 +21,31 @@ public class ItemDisplay : MonoBehaviour
     {
         itemIcon.enabled = false;
         timerText.enabled = false;
+        if (timerCoroutine != null)
+        {
+            StopCoroutine(timerCoroutine);
+            timerCoroutine = null;
+        }
+    }
+
+    public void StartTimer(float duration)
+    {
+        if (timerCoroutine != null)
+        {
+            StopCoroutine(timerCoroutine);
+        }
+        timerCoroutine = StartCoroutine(UpdateTimer(duration));
+    }
+
+    private IEnumerator UpdateTimer(float duration)
+    {
+        float remainingTime = duration;
+        while (remainingTime > 0)
+        {
+            timerText.text = $"{remainingTime:F1} s";
+            yield return new WaitForSeconds(0.1f);
+            remainingTime -= 0.1f;
+        }
+        timerText.text = "";
     }
 }

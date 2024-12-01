@@ -68,6 +68,7 @@ public class Hunter : MonoBehaviour
         health += potion.GetHealthAmount();
         if (health > 100f) health = 100f;
         healthBar.UpdateHealth(health);
+        healthBar.AnimateHealthIncrease(); // Animer l'augmentation de la santé
         potion.Consume();
     }
 
@@ -83,6 +84,7 @@ public class Hunter : MonoBehaviour
         weapon.transform.SetParent(transform); // Set hunter as a parent
         weapon.transform.localPosition = new Vector3(0, 1, 0); // Position for carrying weapon
         itemDisplay.UpdateItemUI(weapon.GetWeaponIcon(), attackTimer);
+        itemDisplay.StartTimer(weapon.GetUseTime()); // Start the timer
     }
 
     void Attack()
@@ -105,7 +107,6 @@ public class Hunter : MonoBehaviour
     IEnumerator RemoveWeapon()
     {
         yield return new WaitForSeconds(weapon.GetUseTime());
-        //itemDisplay.UpdateItemUI(weapon.GetWeaponIcon(), weapon.GetUseTime());
         if (weapon != null)
         {
             Destroy(weapon.gameObject);
