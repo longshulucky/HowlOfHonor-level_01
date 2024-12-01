@@ -6,12 +6,14 @@ public class Hunter : MonoBehaviour
 {
     [SerializeField] private float speed = 2f;
     [SerializeField] private float changeDirectionTime = 3f;
-    [SerializeField] private float timer;
+    [SerializeField] private float timer; // Change direction timer
     [SerializeField] private Vector3 direction;
+
     [SerializeField] private float health = 100f;
     [SerializeField] private HealthBar healthBar;
-    [SerializeField] private Weapon weapon;
     [SerializeField] private ItemDisplay itemDisplay;
+
+    [SerializeField] private Weapon weapon;
     private float attackTimer = 0f;
 
     // Start is called before the first frame update
@@ -26,6 +28,7 @@ public class Hunter : MonoBehaviour
     {
         timer -= Time.deltaTime;
         attackTimer -= Time.deltaTime;
+
         if (timer < 0)
         {
             ChangeDirection();
@@ -66,7 +69,6 @@ public class Hunter : MonoBehaviour
         if (health > 100f) health = 100f;
         healthBar.UpdateHealth(health);
         potion.Consume();
-        //itemDisplay.SetItem(potion.GetHealthAmount(), potion.GetComponent<SpriteRenderer>().sprite);
     }
 
     public bool IsCarryingWeapon()
@@ -77,9 +79,10 @@ public class Hunter : MonoBehaviour
     public void EquipWeapon(Weapon weapon)
     {
         this.weapon = weapon;
+        attackTimer = weapon.GetCooldownTime(); // Start with cooldown time
         weapon.transform.SetParent(transform); // Set hunter as a parent
         weapon.transform.localPosition = new Vector3(0, 1, 0); // Position for carrying weapon
-        itemDisplay.SetItem(weapon.GetUseTime(), weapon.GetImage());
+        itemDisplay.UpdateItemUI(weapon.GetWeaponIcon(), attackTimer);
     }
 
     void Attack()
@@ -102,10 +105,12 @@ public class Hunter : MonoBehaviour
     IEnumerator RemoveWeapon()
     {
         yield return new WaitForSeconds(weapon.GetUseTime());
+        //itemDisplay.UpdateItemUI(weapon.GetWeaponIcon(), weapon.GetUseTime());
         if (weapon != null)
         {
             Destroy(weapon.gameObject);
             weapon = null;
+            itemDisplay.ClearItemUI();
         }
     }
 }
