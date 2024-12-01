@@ -114,4 +114,9 @@ public class Hunter : MonoBehaviour
             itemDisplay.ClearItemUI();
         }
     }
+
+    public float GetHealth()
+    {
+        return health;
+    }
 }
