@@ -22,7 +22,7 @@ public class HealthBar : MonoBehaviour
     public void UpdateHealth(float health)
     {
         healthFill.fillAmount = health / 100;
-        healthText.text = $"{(int)health} / 100"; // Mise à jour du texte de la santé
+        healthText.text = $"{(int)Mathf.Max(health, 0)} / 100"; // Mise à jour du texte de la santé
 
         // Change color based on health percentage
         if (health > 66)

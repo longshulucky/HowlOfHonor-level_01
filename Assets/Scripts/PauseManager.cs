@@ -17,7 +17,11 @@ public class PauseManager : MonoBehaviour
             if (isPaused)
             {
                 ResumeGame();
-            } else PauseGame();
+            }
+            else
+            {
+                PauseGame();
+            }
         }
         if (hunter.GetHealth() <= 0)
         {
@@ -45,7 +49,7 @@ public class PauseManager : MonoBehaviour
         Time.timeScale = 1f;
         isPaused = false;
     }
-    
+
     public void GameOver()
     {
         gameOverMenu.SetActive(true);
@@ -55,8 +59,13 @@ public class PauseManager : MonoBehaviour
 
     public void TryAgain()
     {
-        gameOverMenu.SetActive(false);
+        SceneManager.sceneLoaded += OnSceneLoaded;
         SceneManager.LoadScene(1);
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
         Time.timeScale = 1f;
         isPaused = false;
     }
