@@ -11,6 +11,7 @@ public class Hunter : MonoBehaviour
     [SerializeField] private float health = 100f;
     [SerializeField] private HealthBar healthBar;
     [SerializeField] private Weapon weapon;
+    private float attackTimer = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,7 @@ public class Hunter : MonoBehaviour
     void Update()
     {
         timer -= Time.deltaTime;
+        attackTimer -= Time.deltaTime;
         if (timer < 0)
         {
             ChangeDirection();
@@ -30,9 +32,10 @@ public class Hunter : MonoBehaviour
         transform.Translate(direction * speed * Time.deltaTime, Space.World);
 
         // Attack if hunter has a weapon
-        if (weapon != null)
+        if (weapon != null && attackTimer <= 0)
         {
             Attack();
+            attackTimer = weapon.GetCooldownTime();
         }
     }
 
@@ -78,8 +81,11 @@ public class Hunter : MonoBehaviour
 
     void Attack()
     {
-        StartCoroutine(RemoveWeapon());
+        if (weapon == null) return;
         Collider[] monsters = Physics.OverlapSphere(transform.position, weapon.GetAttackRadius());
+        if (monsters.Length == 0) return;
+
+        StartCoroutine(RemoveWeapon());
         foreach (Collider monsterCollider in monsters)
         {
             Monster monster = monsterCollider.GetComponent<Monster>();
@@ -93,7 +99,10 @@ public class Hunter : MonoBehaviour
     IEnumerator RemoveWeapon()
     {
         yield return new WaitForSeconds(weapon.GetUseTime());
-        Destroy(weapon.gameObject);
-        weapon = null;
+        if (weapon != null)
+        {
+            Destroy(weapon.gameObject);
+            weapon = null;
+        }
     }
 }
