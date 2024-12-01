@@ -56,6 +56,14 @@ public class Hunter : MonoBehaviour
         }
     }
 
+    public void UseHealthPotion(HealthPotion potion)
+    {
+        health += potion.GetHealthAmount();
+        if (health > 100f) health = 100f; // Assurez-vous que la santé ne dépasse pas 100
+        healthBar.UpdateHealth(health);
+        potion.Consume();
+    }
+
     public bool IsCarryingWeapon()
     {
         return weapon != null;
