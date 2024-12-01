@@ -39,23 +39,13 @@ public class Hunter : MonoBehaviour
     {
         if (other.CompareTag("Monster"))
         {
-            Debug.Log("OnTriggerEnter called!");
             Monster monster = other.GetComponent<Monster>();
             health -= monster.GetDamage();
-            Debug.Log("Health after damage: " + health);
             healthBar.UpdateHealth(health);
-        }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Monster"))
-        {
-            Debug.Log("OnCollisionEnter called!");
-            Monster monster = collision.gameObject.GetComponent<Monster>();
-            health -= monster.GetDamage();
-            Debug.Log("Health after damage: " + health);
-            healthBar.UpdateHealth(health);
+            if (health <= 0)
+            {
+                Debug.Log("Hunter is dead!");
+            }
         }
     }
 }
