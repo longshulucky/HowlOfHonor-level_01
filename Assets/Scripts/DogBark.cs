@@ -7,14 +7,16 @@ public class DogBark : MonoBehaviour
     public LayerMask monsterLayer;
     [SerializeField] private Transform hunter;
     [SerializeField] private float barkRadius = 20f;
-    [SerializeField] private float chasingTime = 10f;
+    [SerializeField] private float chasingTime = 5f;
+    [SerializeField] private PlayerCooldown playerCooldown; // Référence au script de cooldown
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !playerCooldown.IsCooldownActive())
         {
             StartCoroutine(Bark());
+            playerCooldown.StartCooldown(chasingTime); // Démarrer le cooldown
         }
     }
 
