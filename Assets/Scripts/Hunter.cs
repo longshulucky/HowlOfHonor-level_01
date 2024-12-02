@@ -82,7 +82,7 @@ public class Hunter : MonoBehaviour
         this.weapon = weapon;
         attackTimer = weapon.GetCooldownTime(); // Start with cooldown time
         weapon.transform.SetParent(transform); // Set hunter as a parent
-        weapon.transform.localPosition = new Vector3(0, 1, 0); // Position for carrying weapon
+        weapon.transform.localPosition = new Vector3(-2, -1f, -0.2f); // Position for carrying weapon
         itemDisplay.UpdateItemUI(weapon.GetWeaponIcon(), attackTimer);
         itemDisplay.StartTimer(weapon.GetUseTime()); // Start the timer
     }

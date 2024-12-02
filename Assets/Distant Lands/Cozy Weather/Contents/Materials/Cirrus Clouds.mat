@@ -8,19 +8,18 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Cirrus Clouds
-  m_Shader: {fileID: 4800000, guid: 0406db5a14f94604a8c57ccfbc9f3b46, type: 3}
+  m_Shader: {fileID: 4800000, guid: 1a6791d1617850b49b130b523f5ebf5c, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
-  - _EMISSION
+  m_ValidKeywords: []
   m_InvalidKeywords:
+  - _EMISSION
   - _FLIPBOOKBLENDING_OFF
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap:
-    RenderType: Opaque
+  stringTagMap: {}
   disabledShaderPasses:
   - GRABPASS
   m_LockedProperties: 
@@ -32,6 +31,18 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ChemtrailsTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CirrostratusTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CirrusTexture:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -67,20 +78,40 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _AlphaClip: 0
     - _AlphaToMask: 0
+    - _AltocumulusMultiplier: 0
+    - _AltocumulusScale: 3
     - _Blend: 0
     - _BlendOp: 0
+    - _BorderEffect: 0
+    - _BorderHeight: 1
+    - _BorderVariation: 1
     - _BumpScale: 1
     - _CameraFadingEnabled: 0
     - _CameraFarFadeDistance: 2
     - _CameraNearFadeDistance: 1
+    - _ChemtrailsMoveSpeed: 0
+    - _ChemtrailsMultiplier: 1
+    - _CirrostratusMoveSpeed: 0
+    - _CirrostratusMultiplier: 1
+    - _CirrusMoveSpeed: 0
+    - _CirrusMultiplier: 1
+    - _ClippingThreshold: 0.5
+    - _CloudFlareFalloff: 1
     - _ColorMode: 0
     - _Cull: 2
+    - _CumulusCoverageMultiplier: 1
     - _Cutoff: 0.5
+    - _DetailAmount: 1
     - _DetailNormalMapScale: 1
+    - _DetailScale: 0.5
     - _DistortionBlend: 0.5
     - _DistortionEnabled: 0
     - _DistortionStrength: 1
@@ -94,8 +125,15 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 1
     - _LightingEnabled: 0
+    - _MainCloudScale: 10
+    - _MaxCloudCover: 1
     - _Metallic: 0
+    - _MinCloudCover: 0
     - _Mode: 0
+    - _MoonFlareFalloff: 1
+    - _NimbusHeight: 1
+    - _NimbusMultiplier: 1
+    - _NimbusVariation: 1
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _QueueOffset: 0
@@ -106,17 +144,26 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
+    - _SunFlareFalloff: 1
     - _Surface: 0
     - _UVSec: 0
+    - _WindSpeed: 0
     - _ZWrite: 1
+    - __dirty: 1
     m_Colors:
+    - _AltoCloudColor: {r: 1, g: 1, b: 1, a: 0}
+    - _AltocumulusWindSpeed: {r: 1, g: -2, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
+    - _CloudColor: {r: 0.7264151, g: 0.7264151, b: 0.7264151, a: 0}
+    - _CloudHighlightColor: {r: 1, g: 1, b: 1, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _ColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _MoonColor: {r: 1, g: 1, b: 1, a: 0}
     - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
+    - _StormDirection: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &1318098667447036196
 MonoBehaviour:

@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class MonsterSpawner : MonoBehaviour
 {
-    public GameObject monsterPrefab;
-    [SerializeField] private int monstersCount = 3;
+    [SerializeField] private GameObject[] monsterPrefabs;
+    [SerializeField] private int minMonstersCount = 1;
+    [SerializeField] private int maxMonstersCount = 5;
     [SerializeField] private float spawnTimeDifference = 0.5f;
 
     private void OnTriggerEnter(Collider other)
@@ -18,9 +19,15 @@ public class MonsterSpawner : MonoBehaviour
 
     IEnumerator SpawnMonsters()
     {
-        for (int i = 0; i < monstersCount; i++)
+        int randomMonsterCount = Random.Range(minMonstersCount, maxMonstersCount + 1);
+
+        for (int i = 0; i < randomMonsterCount; i++)
         {
-            Instantiate(monsterPrefab, GetRandomPoint(), transform.rotation);
+            // Choose random monster
+            GameObject randomMonsterPrefab = monsterPrefabs[Random.Range(0, monsterPrefabs.Length)];
+
+            // Spawn monster
+            Instantiate(randomMonsterPrefab, GetRandomPoint(), transform.rotation);
             yield return new WaitForSeconds(spawnTimeDifference);
         }
     }

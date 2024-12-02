@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private Animator animator;
     [SerializeField] private float speed = 6f;
     private Rigidbody playerRb;
 
@@ -27,5 +28,23 @@ public class PlayerController : MonoBehaviour
 
         Vector3 movement = new Vector3(horizontalInput, 0, verticalInput) * speed * Time.deltaTime;
         transform.Translate(movement, Space.World);
+
+        // Rotation
+        if (horizontalInput > 0) // Move right
+        {
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+        else if (horizontalInput < 0) // Move left
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        if (movement.magnitude > 0f)
+        {
+            animator.SetBool("isRunning", true);
+        }
+        else
+        {
+            animator.SetBool("isRunning", false);
+        }
     }
 }

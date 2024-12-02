@@ -30,6 +30,21 @@ public class Monster : MonoBehaviour
             Vector3 direction = (target.position - transform.position).normalized;
             float distance = Vector3.Distance(transform.position, target.position);
 
+            // Rotate monster
+            if (direction.magnitude > 0f)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(direction);
+                // Повернуть только по оси Y
+                if (targetRotation.eulerAngles.y > 90)
+                {
+                    transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+                } else
+                {
+                    transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+                }
+                //transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime); // Плавный поворот
+            }
+
             if (distance > attackDistance)
             {
                 transform.Translate(direction * speed * Time.deltaTime, Space.World);
