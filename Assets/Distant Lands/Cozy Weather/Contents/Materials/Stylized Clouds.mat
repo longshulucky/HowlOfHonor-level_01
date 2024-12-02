@@ -220,7 +220,7 @@ Material:
     - _SecondLayer: {r: 0.9056604, g: 0.9056604, b: 0.9056604, a: 0}
     - _SecondLayer1: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 0}
     - _ShadowDirection: {r: 0, g: 0, b: 0, a: 0}
-    - _StormDirection: {r: 0.70504063, g: -0, b: -0.7091669, a: 0}
+    - _StormDirection: {r: -0.76325405, g: -0, b: -0.6460985, a: 0}
     - _SunDirection: {r: -0.03445217, g: -0.96637625, b: -0.25481415, a: 0}
     - _SunDirection1: {r: 0, g: 0, b: 0, a: 0}
     - _Vector0: {r: 0.12, g: 1.5, b: 0, a: 0}

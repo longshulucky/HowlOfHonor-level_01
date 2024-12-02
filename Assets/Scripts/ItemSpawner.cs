@@ -7,7 +7,6 @@ public class ItemSpawner : MonoBehaviour
     [SerializeField] private GameObject[] weaponPrefabs;
     [SerializeField] private GameObject[] healthPotionPrefabs;
     [SerializeField] private int spawnCount = 10;
-    [SerializeField] private float spawnAreaRadius = 10f;
     [SerializeField] private float itemLifetime = 15f;
     [SerializeField] private float spawnInterval = 3f;
     [SerializeField] private GameObject spawnArea;
@@ -26,7 +25,7 @@ public class ItemSpawner : MonoBehaviour
             for (int i = 0; i < spawnCount; i++)
             {
                 GameObject itemToSpawn = GetRandomItemPrefab();
-                Vector3 spawnPosition = GetRandomPositionOnTerrain();
+                Vector3 spawnPosition = GetRandomPositionOnCollider();
 
                 spawnPositions.Add(spawnPosition);
                 GameObject spawnedItem = Instantiate(itemToSpawn, spawnPosition, Quaternion.identity);
@@ -39,7 +38,7 @@ public class ItemSpawner : MonoBehaviour
 
     GameObject GetRandomItemPrefab()
     {
-        int randomIndex = Random.Range(0, 2); // 0 - weapon, 1 - health potion
+        int randomIndex = Random.Range(0, 2);
 
         if (randomIndex == 0)
         {
@@ -53,17 +52,19 @@ public class ItemSpawner : MonoBehaviour
         }
     }
 
-    Vector3 GetRandomPositionOnTerrain()
+    Vector3 GetRandomPositionOnCollider()
     {
         Vector3 randomPosition;
 
+        Vector3 center = spawnArea.GetComponent<BoxCollider>().center;
+        Vector3 size = spawnArea.GetComponent<BoxCollider>().size;
+
         do
         {
-            float randomX = transform.position.x + Random.Range(-spawnAreaRadius, spawnAreaRadius);
-            float randomZ = transform.position.z + Random.Range(-spawnAreaRadius, spawnAreaRadius);
-            float randomY = transform.position.y + Random.Range(-spawnAreaRadius, spawnAreaRadius);
+            float randomX = Random.Range(center.x - size.x / 2, center.x + size.x / 2);
+            float randomZ = Random.Range(center.z - size.z / 2, center.z + size.z / 2);
 
-            randomPosition = new Vector3(randomX, randomY, randomZ);
+            randomPosition = new Vector3(randomX, spawnArea.transform.position.y, randomZ);
         }
         while (IsPositionOccupied(randomPosition));
 

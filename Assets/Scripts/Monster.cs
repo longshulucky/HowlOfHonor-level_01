@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
+    public LevelManager levelManager;
     [SerializeField] private float speed = 2f;
     [SerializeField] private Transform target;
     [SerializeField] private float damage = 3f;
@@ -14,6 +15,7 @@ public class Monster : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        levelManager = FindObjectOfType<LevelManager>();
         // Set hunter as a target
         GameObject hunterObject = GameObject.FindWithTag("Hunter");
         if (hunterObject != null)
@@ -95,6 +97,7 @@ public class Monster : MonoBehaviour
     public void Death()
     {
         Destroy(gameObject);
+        levelManager.OnMonsterKilled();
     }
 
     // Set a target for a monster
